@@ -17,14 +17,19 @@ var hentlag = function(lag){
 var kalkulerOgLeggTilPoeng = function(lag, scoretMal, sluppetInnMal){
     var aklag = hentlag(lag);
     if (!aklag){
-      lagsliste.push({'navn':lag,'poeng':0.0,'pm':0.0,'mm':0.0,'kamper':0.0});
+      lagsliste.push({'navn':lag, 'vunnet':0, 'uavgjort':0, 'tapt':0, 'poeng':0.0,'pm':0.0,'mm':0.0,'kamper':0.0});
       aklag = hentlag(lag);
     }
-    var poeng = 0;
+    var poeng ;
     if (scoretMal == sluppetInnMal) {
+      aklag.uavgjort ++;
       poeng=1;
     } else if (scoretMal*1.0 > sluppetInnMal*1.0) {
       poeng = 3;
+      aklag.vunnet ++;
+    } else {
+      poeng = 0;
+      aklag.tapt ++;
     }
 
     aklag.poeng += poeng*1.0;

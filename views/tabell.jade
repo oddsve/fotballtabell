@@ -11,15 +11,21 @@ html
       thead
         tr
           th Lag
-          th Kamper
-          th Mål
-          th Målforskjell
-          th Poeng
+          th.nummer K
+          th.nummer V
+          th.nummer U
+          th.nummer T
+          th.kort-besk Mål
+          th.nummer Målf.
+          th.nummer Poeng
       tbody
         each lag in lagsliste
           tr
             td= lag.navn
-            td.nummer= lag.kamper
-            td= lag.pm+' - '+lag.mm
+            td.nummer.kort-tall= lag.kamper
+            td.nummer.kort-tall= lag.vunnet
+            td.nummer.kort-tall= lag.uavgjort
+            td.nummer.kort-tall= lag.tapt
+            td.kort-besk= lag.pm+' - '+lag.mm
             td.nummer= lag.pm-lag.mm
             td.nummer= lag.poeng
