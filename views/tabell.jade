@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Tabeller for alle
+    link(href='/css/style.css', rel='stylesheet')
+
+  body
+    h1 Tabell
+
+    table
+      thead
+        tr
+          th Lag
+          th Kamper
+          th Mål
+          th Målforskjell
+          th Poeng
+      tbody
+        each lag in lagsliste
+          tr
+            td= lag.navn
+            td.nummer= lag.kamper
+            td= lag.pm+' - '+lag.mm
+            td.nummer= lag.pm-lag.mm
+            td.nummer= lag.poeng

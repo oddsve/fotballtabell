@@ -1,0 +1,13 @@
+{
+  "name"         : "fotballtabell",
+  "version"      : "0.0.1",
+  "description"  : "Gir tabeller for også yngre spillere.",
+  "main"         : "server.js",
+  "author"       : "Oddsve",
+  "dependencies" : {
+    "express"    : "latest",
+    "yade"       : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest"
+  }
+}
