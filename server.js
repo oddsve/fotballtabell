@@ -12,7 +12,12 @@ app.get('/', function (req, res) {
    res.send('Hello World');
 })
 
-var server = app.listen(8081, function () {
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+
+
+var server = app.listen(80, function () {
    var host = server.address().address
    var port = server.address().port
 
