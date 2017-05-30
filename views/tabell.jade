@@ -10,7 +10,8 @@ html
     table
       thead
         tr
-          th Lag
+          th Nr
+          th.tekst Lag
           th.nummer K
           th.nummer V
           th.nummer U
@@ -19,8 +20,10 @@ html
           th.nummer Målf.
           th.nummer Poeng
       tbody
+        -var index = 0
         each lag in lagsliste
           tr
+            td=index++
             td= lag.navn
             td.nummer.kort-tall= lag.kamper
             td.nummer.kort-tall= lag.vunnet
