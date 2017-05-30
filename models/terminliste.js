@@ -2,6 +2,7 @@ var http = require('https');
 var cheerio = require('cheerio');
 const util = require('util');
 
+var data ;
 var lagsliste ;
 
 var hentlag = function(lag){
@@ -42,6 +43,8 @@ var kalkulerOgLeggTilPoeng = function(lag, scoretMal, sluppetInnMal){
 var  traverseFotballDOM = function(dom) {
   var $ = cheerio.load(dom);
 
+  data.turnering = $('.pre-season-text').text();
+
   $('tr').filter(function(){
     json = {};
     var data = $(this);
@@ -69,6 +72,7 @@ var  traverseFotballDOM = function(dom) {
 
 exports.get = function(id, cb) {
   lagsliste = [];
+  data = {};
   var options = {
     host: 'www.fotball.no',
     path: '/fotballdata/turnering/terminliste/?fiksId=' + id
@@ -109,8 +113,8 @@ exports.get = function(id, cb) {
           return -1;
         }
       })
-
-      cb(null,lagsliste)
+      data.lagsliste = lagsliste;
+      cb(null,data)
     });
   }
 
