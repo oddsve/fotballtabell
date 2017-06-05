@@ -32,3 +32,22 @@ html
             td.kort-besk= lag.pm+' - '+lag.mm
             td.nummer= lag.pm-lag.mm
             td.nummer= lag.poeng
+
+
+    table
+      thead
+        tr
+          th.nummer Dato
+          th.nummer Runde
+          th.tekst Hjemmelag
+          th.tekst Bortelag
+          th.nummer Resultat
+      tbody
+        -var index = 1
+        each kamp in data.kampliste
+          tr
+            td= kamp.dato
+            td= kamp.runde
+            td= kamp.hjemmelag
+            td= kamp.bortelag
+            td= kamp.resultat

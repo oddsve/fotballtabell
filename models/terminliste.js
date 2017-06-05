@@ -4,6 +4,7 @@ const util = require('util');
 
 var data ;
 var lagsliste ;
+var kampliste ;
 
 var hentlag = function(lag){
   var ret = false;
@@ -40,6 +41,18 @@ var kalkulerOgLeggTilPoeng = function(lag, scoretMal, sluppetInnMal){
     //console.log(util.inspect(lagsliste, false, null))
 }
 
+var leggTilKamp = function (hjemmelag, bortelag, hjemmemal, bortemal, dato, runde) {
+  var kamp = {}
+  kamp.dato = dato;
+  kamp.runde = runde;
+  kamp.hjemmelag = hjemmelag;
+  kamp.bortelag = bortelag;
+  kamp.hjemmemal = hjemmemal;
+  kamp.bortemal = bortemal;
+  kamp.resultat = hjemmemal + " - " + bortemal;
+  kampliste.push(kamp);
+}
+
 var  traverseFotballDOM = function(dom) {
   var $ = cheerio.load(dom);
 
@@ -51,6 +64,9 @@ var  traverseFotballDOM = function(dom) {
     var hjemmelag = data.children('.table--mobile__home').text();
     var bortelag = data.children('.table--mobile__away').text();
     var resultat = data.children('.table--mobile__result').text();
+    var dato = data.children('.table--mobile__date').text();
+    var runde = data.children('.table--mobile__round').text();
+
 
 
     var myRegexp = /(\d*) - (\d*)/g;
@@ -63,8 +79,9 @@ var  traverseFotballDOM = function(dom) {
       kalkulerOgLeggTilPoeng(hjemmelag,hjemmemal,bortemal);
       kalkulerOgLeggTilPoeng(bortelag,bortemal,hjemmemal);
 
-
+      leggTilKamp(hjemmelag, bortelag, hjemmemal, bortemal, dato, runde);
     }
+
 
   })
 }
@@ -72,6 +89,7 @@ var  traverseFotballDOM = function(dom) {
 
 exports.get = function(id, cb) {
   lagsliste = [];
+  kampliste = [];
   data = {};
   var options = {
     host: 'www.fotball.no',
@@ -114,6 +132,7 @@ exports.get = function(id, cb) {
         }
       })
       data.lagsliste = lagsliste;
+      data.kampliste = kampliste;
       cb(null,data)
     });
   }
