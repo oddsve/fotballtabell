@@ -4,6 +4,9 @@ html
     title Tabeller for alle
     link(href='/css/style.css', rel='stylesheet')
 
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+
+
   body
     h1= data.turnering
 
@@ -24,7 +27,8 @@ html
         each lag in data.lagsliste
           tr
             td=index++
-            td= lag.navn
+            td
+              a(href="#" id= lag.lagTrimmet class= 'dette-laget')= lag.navn
             td.nummer.kort-tall= lag.kamper
             td.nummer.kort-tall= lag.vunnet
             td.nummer.kort-tall= lag.uavgjort
@@ -32,6 +36,9 @@ html
             td.kort-besk= lag.pm+' - '+lag.mm
             td.nummer= lag.pm-lag.mm
             td.nummer= lag.poeng
+
+    div.vis-alle
+      a(href="#") Vis alle
 
 
     table
@@ -45,9 +52,11 @@ html
       tbody
         -var index = 1
         each kamp in data.kampliste
-          tr
+          tr(class= kamp.beggelagTrimmet + " kamper" )
             td= kamp.dato
             td= kamp.runde
             td= kamp.hjemmelag
             td= kamp.bortelag
             td= kamp.resultat
+
+    script(type='text/javascript', src='/js/manipulation.js')

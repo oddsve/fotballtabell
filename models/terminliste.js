@@ -18,8 +18,10 @@ var hentlag = function(lag){
 
 var kalkulerOgLeggTilPoeng = function(lag, scoretMal, sluppetInnMal){
     var aklag = hentlag(lag);
+
     if (!aklag){
-      lagsliste.push({'navn':lag, 'vunnet':0, 'uavgjort':0, 'tapt':0, 'poeng':0.0,'pm':0.0,'mm':0.0,'kamper':0.0});
+      var lagTrimmet = lag.toLowerCase().replace(/\s/g, '');
+      lagsliste.push({'navn':lag, 'lagTrimmet': lagTrimmet, 'vunnet':0, 'uavgjort':0, 'tapt':0, 'poeng':0.0,'pm':0.0,'mm':0.0,'kamper':0.0});
       aklag = hentlag(lag);
     }
     var poeng ;
@@ -41,15 +43,22 @@ var kalkulerOgLeggTilPoeng = function(lag, scoretMal, sluppetInnMal){
     //console.log(util.inspect(lagsliste, false, null))
 }
 
-var leggTilKamp = function (hjemmelag, bortelag, hjemmemal, bortemal, dato, runde) {
+var leggTilKamp = function (hjemmelag, bortelag, hjemmemal, bortemal, dato, runde, tidspunkt) {
   var kamp = {}
   kamp.dato = dato;
   kamp.runde = runde;
   kamp.hjemmelag = hjemmelag;
   kamp.bortelag = bortelag;
+  kamp.beggelagTrimmet = bortelag.toLowerCase().replace(/\s/g, '') + " " + hjemmelag.toLowerCase().replace(/\s/g, '');
   kamp.hjemmemal = hjemmemal;
   kamp.bortemal = bortemal;
-  kamp.resultat = hjemmemal + " - " + bortemal;
+  kamp.tidspunkt = tidspunkt;
+  if (hjemmemal) {
+      kamp.resultat = hjemmemal + " - " + bortemal;
+  } else {
+    kamp.resultat = tidspunkt;
+  }
+
   kampliste.push(kamp);
 }
 
@@ -66,21 +75,25 @@ var  traverseFotballDOM = function(dom) {
     var resultat = data.children('.table--mobile__result').text();
     var dato = data.children('.table--mobile__date').text();
     var runde = data.children('.table--mobile__round').text();
+    var tidspunkt = data.children('.table--mobile__time').text();
 
+    var bortemal = null;
+    var hjemmemal = null;
 
 
     var myRegexp = /(\d*) - (\d*)/g;
     var match = myRegexp.exec(resultat);
     if (match) {
-      var hjemmemal = match[1];
-      var bortemal = match[2];
+      hjemmemal = match[1];
+      bortemal = match[2];
 
       //console.log(hjemmelag, bortelag, resultat);
       kalkulerOgLeggTilPoeng(hjemmelag,hjemmemal,bortemal);
       kalkulerOgLeggTilPoeng(bortelag,bortemal,hjemmemal);
 
-      leggTilKamp(hjemmelag, bortelag, hjemmemal, bortemal, dato, runde);
+
     }
+    leggTilKamp(hjemmelag, bortelag, hjemmemal, bortemal, dato, runde, tidspunkt);
 
 
   })

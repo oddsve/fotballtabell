@@ -11,3 +11,9 @@
   width: 4rem;
   text-align: left;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
