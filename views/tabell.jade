@@ -44,8 +44,8 @@ html
     table
       thead
         tr
-          th.nummer Dato
           th.nummer Runde
+          th.nummer Dato
           th.tekst Hjemmelag
           th.tekst Bortelag
           th.nummer Resultat
@@ -53,10 +53,10 @@ html
         -var index = 1
         each kamp in data.kampliste
           tr(class= kamp.beggelagTrimmet + " kamper" )
-            td= kamp.dato
             td= kamp.runde
-            td= kamp.hjemmelag
-            td= kamp.bortelag
+            td= kamp.dato
+            td(class= kamp.hjemmeseier)= kamp.hjemmelag
+            td(class= kamp.borteseier)= kamp.bortelag
             td= kamp.resultat
 
     script(type='text/javascript', src='/js/manipulation.js')
