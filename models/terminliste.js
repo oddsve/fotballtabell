@@ -74,7 +74,6 @@ var  traverseFotballDOM = function(dom) {
   data.turnering = $('.pre-season-text').text();
 
   $('tr').filter(function(){
-    json = {};
     var data = $(this);
     var hjemmelag = data.children('.table--mobile__home').text();
     var bortelag = data.children('.table--mobile__away').text();

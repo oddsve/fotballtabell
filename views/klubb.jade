@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Tabeller for alle
+    link(href='/css/style.css', rel='stylesheet')
+
+
+
+  body
+    h1 Turneringer
+
+    p
+      ul#Turneringer
+        each turnering in data.turneringsliste
+          li
+            a(href= turnering.href)= turnering.navn
