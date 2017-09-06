@@ -55,9 +55,9 @@ var leggTilKamp = function (hjemmelag, bortelag, hjemmemal, bortemal, dato, rund
   kamp.tidspunkt = tidspunkt;
   if (hjemmemal) {
       kamp.resultat = hjemmemal + " - " + bortemal;
-      if( hjemmemal > bortemal ){
+      if( hjemmemal*1.0 > bortemal*1.0 ){
         kamp.hjemmeseier = "vinner";
-      } else if (bortemal > hjemmemal) {
+      } else if (bortemal*1.0 > hjemmemal*1.0) {
         kamp.borteseier = "vinner";
       }
 
