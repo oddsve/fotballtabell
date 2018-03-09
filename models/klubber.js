@@ -29,7 +29,7 @@ exports.get = function(id, cb) {
   turneringsliste = [];
   var options = {
     host: 'www.fotball.no',
-    path: '/turneringer/?s=88&d=13&c=' + id
+    path: '/turneringer/?s=91&d=13&c=' + id
   };
 
 
