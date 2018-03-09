@@ -23,7 +23,7 @@ exports.get = function(id, cb) {
   klubbliste = [];
   var options = {
     host: 'www.fotball.no',
-    path: '/turneringer/?s=88&d=' + id
+    path: '/turneringer/?s=91&d=' + id
   };
 
 
