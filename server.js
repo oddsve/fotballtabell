@@ -14,7 +14,7 @@ var Turneringer     = require('./models/turneringer');
 var Sesonger        = require('./models/sesonger');
 var Tabeller        = require('./models/tabeller');
 
-app.use(express.static('public/tabeller-app'));
+app.use(express.static('client/build'));
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
