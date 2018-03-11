@@ -2,6 +2,7 @@
   margin: 1em;
 }
 
+
 .turnering {
   float: left;
   width: 60%;
@@ -12,3 +13,13 @@
   width: 40%;
 }
 
+@media screen and (max-width: 960px) {
+  .turnering {
+    width: 100%;
+  }
+
+  .turneringsvelger {
+    width: 100%;
+  }
+
+}
