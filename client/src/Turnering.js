@@ -46,8 +46,8 @@ class Kamp extends Component {
     render() {
         return (
             <tr  className="lag">
-                <td>{this.props.value.runde}</td>
-                <td>{this.props.value.dato}</td>
+                <td  >{this.props.value.runde}</td>
+                <td className="lav-pri">{this.props.value.dato}</td>
                 <td>{this.props.value.hjemmelag}</td>
                 <td>{this.props.value.bortelag}</td>
                 <td>{this.props.value.resultat}</td>

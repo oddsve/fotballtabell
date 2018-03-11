@@ -2,6 +2,11 @@
   margin: 1em;
 }
 
+@media screen and (max-width: 560px) {
+  .app{
+    margin: 0;
+  }
+}
 
 .turnering {
   float: left;

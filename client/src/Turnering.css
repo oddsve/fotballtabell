@@ -13,9 +13,17 @@
     text-align: center;
 }
 
+@media screen and (max-width: 560px) {
+  .bredtall {
+      display: none;
+  }
+  .lav-pri {
+    display: none;
+  }
+}
+
+
 table {
     font-size: large;
     margin-bottom: 2em;
 }
-
-
