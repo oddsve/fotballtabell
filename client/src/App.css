@@ -1,0 +1,14 @@
+.app {
+  margin: 1em;
+}
+
+.turnering {
+  float: left;
+  width: 60%;
+}
+
+.turneringsvelger {
+  float: left;
+  width: 40%;
+}
+
