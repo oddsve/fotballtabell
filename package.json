@@ -15,8 +15,5 @@
   "devDependencies": {
     "concurrently": "^3.5.0",
     "style-loader": "^0.20.3"
-  },
-  "engines": {
-    "node": "4.1.1"
   }
 }
