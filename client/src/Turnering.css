@@ -1,0 +1,21 @@
+.tekst {
+    width: 15em;
+    text-align: left;
+}
+
+.tall {
+    text-align: right;
+    width: 2em;
+}
+
+.bredtall {
+    width: 4em;
+    text-align: center;
+}
+
+table {
+    font-size: large;
+    margin-bottom: 2em;
+}
+
+
