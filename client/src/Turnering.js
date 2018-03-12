@@ -15,7 +15,6 @@ class Lag extends Component {
                 <td className="tall">{this.props.value.poeng}</td>
             </tr>
         );
-        let malforskjell = this.props.value.pm - this.props.value.mm;
     }
 }
 
@@ -46,7 +45,7 @@ class Kamp extends Component {
     render() {
         return (
             <tr  className="lag">
-                <td  >{this.props.value.runde}</td>
+                <td>{this.props.value.runde}</td>
                 <td className="lav-pri">{this.props.value.dato}</td>
                 <td>{this.props.value.hjemmelag}</td>
                 <td>{this.props.value.bortelag}</td>

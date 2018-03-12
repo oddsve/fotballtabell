@@ -65,7 +65,7 @@ class Klubbvelger extends Component {
 
     render() {
         let klubber = [];
-        klubber.push(<option></option>)
+        klubber.push(<option key={0} ></option>)
         this.props.options.forEach(klubb =>{
             klubber.push(<option key={klubb.id} value={klubb.id}>{klubb.navn}</option>)
         })

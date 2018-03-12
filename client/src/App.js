@@ -18,6 +18,23 @@ class App extends Component {
         }
     }
 
+    componentDidMount () {
+      const persistState = localStorage.getItem('rootState');
+      console.log("get state", persistState);
+      if (persistState) {
+        try {
+          this.setState(JSON.parse(persistState));
+        } catch (e) {
+          // is not json
+        }
+      }
+    }
+
+    componentWillUnmount () {
+      console.log("unmont");
+    }
+
+
     hentTurnering = async () => {
         const response = await fetch('/api/turneringer/'+ this.state.turneringId );
         const body = await response.json();
@@ -32,6 +49,7 @@ class App extends Component {
         this.hentTurnering()
             .then( res => {
                 this.setState({turneringsdata : res}) ;
+                localStorage.setItem('rootState', JSON.stringify(this.state));
             })
             .catch(err => console.log(err))
         )
