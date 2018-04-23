@@ -69,7 +69,7 @@ class Kamper extends Component {
 }
 
 
-class Turnering extends Component {
+class Turneringsdata extends Component {
 
     render() {
         let data = this.props.value;
@@ -100,6 +100,22 @@ class Turnering extends Component {
                 </table>
             </div>
         );
+    }
+}
+
+class Turnering extends Component {
+  render() {
+      let data = this.props.value;
+      console.log(data);
+      if (data.lagsliste.length > 0 ){
+        return (
+          <Turneringsdata value={data} />
+        );
+      } else {
+        return (
+          <div> Henter data ... </div>
+        )
+      }
     }
 }
 

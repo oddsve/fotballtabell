@@ -20,10 +20,13 @@ class App extends Component {
 
     componentDidMount () {
       const persistState = localStorage.getItem('rootState');
-      console.log("get state", persistState);
+      console.log("get state turneringId", JSON.parse(persistState).turneringId);
       if (persistState) {
         try {
-          this.setState(JSON.parse(persistState));
+          this.setState(
+            { "turneringId" : JSON.parse(persistState).turneringId },
+              () => this.hentTurnering()
+            );
         } catch (e) {
           // is not json
         }
@@ -40,17 +43,13 @@ class App extends Component {
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);
-
-        return body;
+        this.setState({turneringsdata: body})
+        localStorage.setItem('rootState', JSON.stringify(this.state));
     };
 
     handleEndretTurnering(turneringId){
         this.setState({turneringId : turneringId}, () =>
         this.hentTurnering()
-            .then( res => {
-                this.setState({turneringsdata : res}) ;
-                localStorage.setItem('rootState', JSON.stringify(this.state));
-            })
             .catch(err => console.log(err))
         )
     }
