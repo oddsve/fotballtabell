@@ -48,7 +48,10 @@ class Kretsvelger extends Component {
             kretser.push(<option key={krets.id} value={krets.id}>{krets.navn}</option>)
         })
 
-        if (kretser.length > 0){
+        if (!this.props.sesong){
+          return null;
+        }
+        else if (kretser.length > 0) {
           return (
               <form>
                   <select value={this.props.value} onChange={this.handleChange}>
@@ -81,7 +84,10 @@ class Klubbvelger extends Component {
             klubber.push(<option key={klubb.id} value={klubb.id}>{klubb.navn}</option>)
         })
 
-        if (klubber.length > 0){
+        if (!this.props.krets){
+          return null;
+        }
+        else if (klubber.length > 0){
           return (
               <form>
                   <select onChange={this.handleChange}>
@@ -265,8 +271,8 @@ class Turneringsoppslag extends Component {
             <div>
                 <h3>eller finn din klubbs turneringer</h3>
                 <Sesongvelger value={this.state.valgtSesong} options={this.state.sesonger} onSesongChange={this.handleValgtSesong} />
-                <Kretsvelger value={this.state.valgtKrets} options={this.state.kretser} onKretsChange={this.handleValgtKrets} />
-                <Klubbvelger value={this.state.valgtKlubb} options={this.state.klubber} onKlubbChange={this.handleValgtKlubb} />
+                <Kretsvelger sesong={this.state.valgtSesong} value={this.state.valgtKrets} options={this.state.kretser} onKretsChange={this.handleValgtKrets} />
+                <Klubbvelger krets={this.state.valgtKrets} value={this.state.valgtKlubb} options={this.state.klubber} onKlubbChange={this.handleValgtKlubb} />
                 <Turneringsknapper klubb={this.state.valgtKlubb} value={this.state.turneringer} onClick={this.handleValgtTurnering} />
             </div>
         );
