@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import './Turnering.css';
 
 class Lag extends Component {
+    constructor(props) {
+        super(props);
+        this.handleNavnClick = this.handleNavnClick.bind(this);
+    }
+
+    handleNavnClick(e) {
+        this.props.onNavnClick(e);
+    }
+
     render() {
         return (
             <tr  className="lag">
                 <td className="tall">{this.props.ranking}</td>
-                <td className="tekst">{this.props.value.navn}</td>
+                <td className="tekst klikkbar" onClick={this.handleNavnClick}>{this.props.value.navn}</td>
                 <td className="tall">{this.props.value.kamper}</td>
                 <td className="tall">{this.props.value.vunnet}</td>
                 <td className="tall">{this.props.value.uavgjort}</td>
@@ -30,11 +39,21 @@ class Turneringsinfo extends Component {
 }
 
 class Tabell extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleNavnClick = this.handleNavnClick.bind(this);
+    }
+
+    handleNavnClick(e) {
+        this.props.onNavnClick(e);
+    }
+
     render() {
         let alleLag = [];
         let i = 1;
         this.props.value.forEach(laget =>{
-            alleLag.push(<Lag key={laget.lagTrimmet} ranking={i} value={laget}/>);
+            alleLag.push(<Lag key={laget.lagTrimmet} ranking={i} onNavnClick={this.handleNavnClick} value={laget}/>);
             i++;
         })
         return (alleLag);
@@ -61,8 +80,16 @@ class Kamper extends Component {
         let kamper = [];
         let i = 0;
         this.props.value.forEach(kamp =>{
-            kamper.push(<Kamp key={i} value={kamp}/>)
-            i++;
+            if (!this.props.visBare){
+              kamper.push(<Kamp key={i} value={kamp}/>)
+              i++;
+            } else {
+              if (kamp.hjemmelag.replace(/ /g,'') === this.props.visBare.replace(/ /g,'')
+                  || kamp.bortelag.replace(/ /g,'') === this.props.visBare.replace(/ /g,'') ){
+                kamper.push(<Kamp key={i} value={kamp}/>)
+                i++;
+              }
+            }
         })
         return (kamper);
     }
@@ -70,9 +97,29 @@ class Kamper extends Component {
 
 
 class Turneringsdata extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+           visBare : null
+         }
+        this.handleNavnClick = this.handleNavnClick.bind(this);
+        this.handleVisAlleClick = this.handleVisAlleClick.bind(this);
+    }
+
+    handleNavnClick(e) {
+      this.setState({visBare: e.target.innerText});
+    }
+    handleVisAlleClick() {
+      this.setState({visBare: null});
+    }
+
 
     render() {
         let data = this.props.value;
+        let visAlle = "";
+        if (this.state.visBare) {
+          visAlle = "Vis alle";
+        }
         return (
             <div>
                 <Turneringsinfo value={data.turnering} />
@@ -90,12 +137,13 @@ class Turneringsdata extends Component {
                         </tr>
                     </thead>
                     <tbody >
-                    <Tabell value={data.lagsliste}/>
+                    <Tabell onNavnClick={this.handleNavnClick} value={data.lagsliste}/>
                     </tbody>
                 </table>
+                <div class="klikkbar" onClick={this.handleVisAlleClick}>{visAlle}</div>
                 <table>
                     <tbody >
-                    <Kamper value={data.kampliste}/>
+                    <Kamper visBare={this.state.visBare} value={data.kampliste}/>
                     </tbody>
                 </table>
             </div>
@@ -106,7 +154,6 @@ class Turneringsdata extends Component {
 class Turnering extends Component {
   render() {
       let data = this.props.value;
-      console.log(data);
       if (data.lagsliste.length > 0 ){
         return (
           <Turneringsdata value={data} />

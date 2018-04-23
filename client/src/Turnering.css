@@ -27,3 +27,8 @@ table {
     font-size: large;
     margin-bottom: 2em;
 }
+
+.klikkbar{
+  cursor: pointer;
+  text-decoration: underline;
+}
