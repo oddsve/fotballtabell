@@ -3,7 +3,7 @@ input, select, button{
     -moz-border-radius: 5px;
     border-radius: 5px;
     height: 29px;
-    width: 80%;
+    width: 60%;
     font-size: large;
     font-size: large;
     margin-left: .3em;
@@ -29,9 +29,14 @@ input {
 
 h3,h4   {
     margin-bottom: 0;
-    margin-left: .4em;
+    
 }
 
 button {
     cursor: pointer;
+}
+
+.label {
+  width: 20%;
+  display: inline-block;
 }

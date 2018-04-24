@@ -23,6 +23,7 @@ class Fiksinput extends Component {
         return (
             <form >
                 <h3>Legg inn fiks-id</h3>
+                <span class="label">Sesong:</span>
                 <input type="text" onBlur={this.handleBlur}/>
             </form>
         );

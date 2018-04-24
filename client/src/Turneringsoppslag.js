@@ -18,7 +18,7 @@ class Sesongvelger extends Component {
         })
         if (sesonger.length > 0){
           return (
-              <form>
+              <form> <span class="label">Sesong:</span>
                   <select onChange={this.handleChange}>
                       {sesonger}
                   </select>
@@ -44,6 +44,7 @@ class Kretsvelger extends Component {
 
     render() {
         let kretser = [];
+        kretser.push(<option key={0} ></option>)
         this.props.options.forEach(krets =>{
             kretser.push(<option key={krets.id} value={krets.id}>{krets.navn}</option>)
         })
@@ -53,7 +54,7 @@ class Kretsvelger extends Component {
         }
         else if (kretser.length > 0) {
           return (
-              <form>
+              <form> <span class="label">Krets:</span>
                   <select value={this.props.value} onChange={this.handleChange}>
                       {kretser}
                   </select>
@@ -89,7 +90,7 @@ class Klubbvelger extends Component {
         }
         else if (klubber.length > 0){
           return (
-              <form>
+              <form><span class="label">Klubb:</span>
                   <select onChange={this.handleChange}>
                       {klubber}
                   </select>
@@ -156,7 +157,7 @@ class Turneringsoppslag extends Component {
             klubber: [],
             turneringer: [],
             valgtSesong: null,
-            valgtKrets: 13,
+            valgtKrets: null,
             valgtKlubb: null,
             turnering: ''
         };
@@ -183,7 +184,6 @@ class Turneringsoppslag extends Component {
                 this.setState({klubber : res}) ;
             })
             .catch(err => console.log(err));
-
     }
 
     hentSesonger = async () => {
@@ -233,20 +233,20 @@ class Turneringsoppslag extends Component {
                     })
                     .catch(err => console.log(err))
                 }
-
             }
         );
-
     }
 
     handleValgtKrets(kretsId){
-        this.setState({valgtKrets: kretsId});
-        this.hentKlubber()
-            .then( res => {
-                this.setState({klubber : res}) ;
-            })
-            .catch(err => console.log(err));
-
+        this.setState({valgtKrets: kretsId},
+          () => {
+            this.hentKlubber()
+                .then( res => {
+                    this.setState({klubber : res}) ;
+                })
+                .catch(err => console.log(err));
+          }
+        );
     }
 
     handleValgtKlubb(klubbId){
@@ -257,7 +257,6 @@ class Turneringsoppslag extends Component {
                 })
                 .catch(err => console.log(err))
         )
-
     }
 
 
