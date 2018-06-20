@@ -18,7 +18,7 @@ class Sesongvelger extends Component {
         })
         if (sesonger.length > 0){
           return (
-              <form> <span class="label">Sesong:</span>
+              <form> <span className="label">Sesong:</span>
                   <select onChange={this.handleChange}>
                       {sesonger}
                   </select>
@@ -54,7 +54,7 @@ class Kretsvelger extends Component {
         }
         else if (kretser.length > 0) {
           return (
-              <form> <span class="label">Krets:</span>
+              <form> <span className="label">Krets:</span>
                   <select value={this.props.value} onChange={this.handleChange}>
                       {kretser}
                   </select>
@@ -90,7 +90,7 @@ class Klubbvelger extends Component {
         }
         else if (klubber.length > 0){
           return (
-              <form><span class="label">Klubb:</span>
+              <form><span className="label">Klubb:</span>
                   <select onChange={this.handleChange}>
                       {klubber}
                   </select>

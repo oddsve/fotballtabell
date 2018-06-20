@@ -9,7 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.handleEndretTurnering = this.handleEndretTurnering.bind(this);
-
+        this.turneringValgt = false;
         this.state = {
             turneringId: null,
             turneringsdata: {   turnering: "",
@@ -20,8 +20,8 @@ class App extends Component {
 
     componentDidMount () {
       const persistState = localStorage.getItem('rootState');
-      console.log("get state turneringId", JSON.parse(persistState).turneringId);
       if (persistState) {
+        this.turneringValgt = true;
         try {
           this.setState(
             { "turneringId" : JSON.parse(persistState).turneringId },
@@ -48,10 +48,13 @@ class App extends Component {
     };
 
     handleEndretTurnering(turneringId){
+      this.turneringValgt = true;
+      this.setState({turneringsdata: {}}, () =>
         this.setState({turneringId : turneringId}, () =>
-        this.hentTurnering()
+          this.hentTurnering()
             .catch(err => console.log(err))
         )
+      )
     }
 
     render() {
@@ -59,7 +62,7 @@ class App extends Component {
             <div className="app">
                 <h1>Tabeller for alle</h1>
                 <div className="turnering">
-                    <Turnering value={this.state.turneringsdata} />
+                    <Turnering turneringvalgt={this.turneringValgt} value={this.state.turneringsdata} />
                 </div>
                 <div className="turneringsvelger">
                     <h2>Velg turnering</h2>

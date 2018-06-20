@@ -140,7 +140,7 @@ class Turneringsdata extends Component {
                     <Tabell onNavnClick={this.handleNavnClick} value={data.lagsliste}/>
                     </tbody>
                 </table>
-                <div class="klikkbar" onClick={this.handleVisAlleClick}>{visAlle}</div>
+                <div className="klikkbar" onClick={this.handleVisAlleClick}>{visAlle}</div>
                 <table>
                     <tbody >
                     <Kamper visBare={this.state.visBare} value={data.kampliste}/>
@@ -154,13 +154,18 @@ class Turneringsdata extends Component {
 class Turnering extends Component {
   render() {
       let data = this.props.value;
-      if (data.lagsliste.length > 0 ){
+      let turneringValgt = this.props.turneringvalgt;
+      if (data.lagsliste && data.lagsliste.length > 0){
         return (
           <Turneringsdata value={data} />
         );
-      } else {
+      } else  if (turneringValgt){
         return (
           <div> Henter data ... </div>
+        )
+      } else {
+        return (
+          <div> Velg turnering </div>
         )
       }
     }
