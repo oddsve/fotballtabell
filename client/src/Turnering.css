@@ -32,3 +32,22 @@ table {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.vinner {
+  font-weight: bold;
+}
+
+.favoritt {
+  width: 5em;
+  background-color: #EEE;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.favoritt-true {
+  background-color: #F00;
+  color: white;
+
+}

@@ -49,10 +49,10 @@ class Kretsvelger extends Component {
             kretser.push(<option key={krets.id} value={krets.id}>{krets.navn}</option>)
         })
 
-        if (!this.props.sesong){
+        if (kretser.length <= 1){
           return null;
         }
-        else if (kretser.length > 0) {
+        else if (kretser.length > 1) {
           return (
               <form> <span className="label">Krets:</span>
                   <select value={this.props.value} onChange={this.handleChange}>
