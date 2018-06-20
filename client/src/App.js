@@ -75,6 +75,7 @@ class App extends Component {
 
     handleFavorttEndret(turnering, turneringId){
       let fav = this.state.favoritter;
+      if (!fav) fav = {};
 
       if (fav[turneringId]){
         delete(fav[turneringId]);
