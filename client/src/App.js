@@ -43,7 +43,7 @@ class App extends Component {
     }
 
     erFavoritt(turneringId) {
-      if (!state.favoritter) return false;
+      if (!this.state.favoritter) return false;
       if  (this.state.favoritter[turneringId]) return true;
 
       return false;
